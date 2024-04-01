@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Bap
-  Date: 4/1/2024
-  Time: 9:35 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
@@ -57,29 +50,37 @@
                 <div>
                     <form action="home?action=delete" method="post">
                         <input type="hidden" value="${student.studentId}" name="id">
-                        <button class="btn btn-danger">Remove</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">Remove
+                        </button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Would you really want to delete this student?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="submit" class="btn btn-primary">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </form>
                 </div>
-
-
             </td>
         </tr>
     </c:forEach>
-
-
-    <%--<tr>
-        <td>1</td>
-        <td>Nguyen Van A</td>
-        <td>10/10/2010</td>
-        <td>@mdo</td>
-        <td>HA NOI</td>
-        <td>09173786234</td>
-        <td>C1123G1</td>
-        <td colspan="2">
-            <a class="btn btn-warning me-5">Edit</a>
-            <a class="btn btn-danger">Remove</a>
-        </td>
-    </tr>--%>
     </tbody>
 </table>
 </body>
