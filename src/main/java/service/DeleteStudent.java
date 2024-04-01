@@ -6,6 +6,6 @@ public class DeleteStudent {
     StudentDAO studentDAO = new StudentDAO();
 
     public void delete(int studentId) {
-        studentDAO.delete();
+        studentDAO.delete(studentId);
     }
 }

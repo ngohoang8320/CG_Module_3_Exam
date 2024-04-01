@@ -47,12 +47,20 @@
             <td>${student.address}</td>
             <td>${student.phone}</td>
             <td>${student.className}</td>
-            <td colspan="2">
-                <a class="btn btn-warning me-5">Edit</a>
-                <form action="home?action=delete" method="post">
-                    <input type="hidden" value="${student.id}" name="id">
-                    <button class="btn btn-danger">Remove</button>
-                </form>
+            <td colspan="2" class="d-flex">
+                <div class="me-5">
+                    <form action="home?action=edit" method="post">
+                        <input type="hidden" value="${student.studentId}" name="id">
+                        <button class="btn btn-warning">Edit</button>
+                    </form>
+                </div>
+                <div>
+                    <form action="home?action=delete" method="post">
+                        <input type="hidden" value="${student.studentId}" name="id">
+                        <button class="btn btn-danger">Remove</button>
+                    </form>
+                </div>
+
 
             </td>
         </tr>

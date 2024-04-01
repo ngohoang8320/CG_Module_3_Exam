@@ -11,7 +11,7 @@ public interface IStudentDAO {
 
     void edit();
 
-    void delete();
+    void delete(int studentId);
 
     void search();
 }

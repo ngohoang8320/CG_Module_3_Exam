@@ -39,6 +39,7 @@ public class StudentDAO implements IStudentDAO {
                         className);
                 studentList.add(student);
             }
+            rs.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -74,8 +75,15 @@ public class StudentDAO implements IStudentDAO {
     }
 
     @Override
-    public void delete() {
-        
+    public void delete(int studentId) {
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQL_DELETE)) {
+            statement.setInt(1,
+                    studentId);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
