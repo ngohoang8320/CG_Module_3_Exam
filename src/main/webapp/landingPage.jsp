@@ -51,15 +51,16 @@
                     <form action="home?action=delete" method="post">
                         <input type="hidden" value="${student.studentId}" name="id">
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">Remove
+                                data-bs-target="#exampleModal${student.studentId}">Remove
                         </button>
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        <div class="modal fade" id="exampleModal${student.studentId}" tabindex="-1"
+                             aria-labelledby="exampleModalLabel"
                              aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm delete</h1>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                         </div>

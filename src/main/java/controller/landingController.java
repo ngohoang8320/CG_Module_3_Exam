@@ -20,6 +20,10 @@ public class landingController extends HttpServlet {
 
     public void doGet(HttpServletRequest request,
                       HttpServletResponse response) throws IOException, ServletException {
+
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+
         String action = "";
         if (request.getParameter("action") != null) {
             action = request.getParameter("action");
@@ -43,6 +47,8 @@ public class landingController extends HttpServlet {
 
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response) throws IOException, ServletException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         String action = "";
         if (request.getParameter("action") != null) {
             action = request.getParameter("action");
