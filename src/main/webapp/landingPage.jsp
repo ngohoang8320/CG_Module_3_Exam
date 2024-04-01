@@ -49,7 +49,11 @@
             <td>${student.className}</td>
             <td colspan="2">
                 <a class="btn btn-warning me-5">Edit</a>
-                <a class="btn btn-danger">Remove</a>
+                <form action="home?action=delete" method="post">
+                    <input type="hidden" value="${student.id}" name="id">
+                    <button class="btn btn-danger">Remove</button>
+                </form>
+
             </td>
         </tr>
     </c:forEach>

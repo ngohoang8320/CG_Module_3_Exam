@@ -1,6 +1,7 @@
 package controller;
 
 import service.AddStudent;
+import service.DeleteStudent;
 import service.ShowAll;
 
 import javax.servlet.ServletException;
@@ -42,6 +43,11 @@ public class landingController extends HttpServlet {
             case "addition":
                 AddStudent addStudent = new AddStudent();
                 addStudent.add(request);
+                response.sendRedirect("home");
+                break;
+            case "delete":
+                DeleteStudent deleteStudent = new DeleteStudent();
+                deleteStudent.delete(Integer.parseInt(request.getParameter("id")));
                 response.sendRedirect("home");
                 break;
             default:

@@ -5,12 +5,14 @@ import model.Student;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDAO implements IStudentDAO {
     private static final String SQL_ADD = "insert into student(studentName, birth, email, address, phoneNumber, className) values (?, ?, ?, ?, ?, ?);";
     private static final String SQL_ALL = "select * from student;";
+    private static final String SQL_DELETE = "delete from student where studentId = ?;";
 
     @Override
     public List<Student> getAll() {
@@ -22,7 +24,7 @@ public class StudentDAO implements IStudentDAO {
                 int id = Integer.parseInt(rs.getString("studentId"));
                 String name = rs.getString("studentName");
                 String birth = rs.getString("birth");
-                String birthAf = birth.split("-")[2] + "/" + birth.split("-")[1] + "/" + birth.split("-")[0];
+                LocalDate birthFormatted = LocalDate.parse(birth);
                 String email = rs.getString("email");
                 String address = rs.getString("address");
                 String phone = rs.getString("phoneNumber");
@@ -30,7 +32,7 @@ public class StudentDAO implements IStudentDAO {
 
                 Student student = new Student(id,
                         name,
-                        birthAf,
+                        birthFormatted,
                         email,
                         address,
                         phone,
@@ -50,7 +52,7 @@ public class StudentDAO implements IStudentDAO {
             statement.setString(1,
                     student.getStudentName());
             statement.setString(2,
-                    student.getBirth());
+                    student.getBirth().toString());
             statement.setString(3,
                     student.getEmail());
             statement.setString(4,
@@ -73,7 +75,7 @@ public class StudentDAO implements IStudentDAO {
 
     @Override
     public void delete() {
-
+        
     }
 
     @Override

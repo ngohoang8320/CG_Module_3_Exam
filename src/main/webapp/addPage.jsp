@@ -33,7 +33,7 @@
         </div>
         <div class="mb-3">
             <label for="phone" class="form-label">Phone number</label>
-            <input type="text" class="form-control" id="phone">
+            <input type="text" class="form-control" id="phone" name="phone">
         </div>
         <div class="mb-3">
             <label for="class" class="form-label">Class</label>
