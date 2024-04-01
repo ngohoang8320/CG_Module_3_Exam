@@ -1,5 +1,6 @@
 package controller;
 
+import dao.StudentDAO;
 import service.AddStudent;
 import service.DeleteStudent;
 import service.ShowAll;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "landingcontroller", value = "/home")
 public class landingController extends HttpServlet {
@@ -22,6 +24,10 @@ public class landingController extends HttpServlet {
         }
         switch (action) {
             case "addition":
+                StudentDAO studentDAO = new StudentDAO();
+                List<String> classList = studentDAO.getClasses();
+                request.setAttribute("classList",
+                        classList);
                 request.getRequestDispatcher("addPage.jsp").forward(request,
                         response);
                 break;

@@ -75,6 +75,22 @@ public class StudentDAO implements IStudentDAO {
     }
 
     @Override
+    public List<String> getClasses() {
+        List<String> classList = new ArrayList<>();
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement("select className from classroom")) {
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                classList.add(rs.getString("className"));
+            }
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return classList;
+    }
+
+    @Override
     public void delete(int studentId) {
         try (Connection connection = DBConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQL_DELETE)) {

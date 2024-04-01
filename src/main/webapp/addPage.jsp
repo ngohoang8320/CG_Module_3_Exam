@@ -38,7 +38,10 @@
         <div class="mb-3">
             <label for="class" class="form-label">Class</label>
             <select id="class" class="form-select" name="class">
-                <option></option>
+                <option value="">Choose your class</option>
+                <c:forEach items="${classList}" var="classes">
+                    <option value="${classes}">${classes}</option>
+                </c:forEach>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
