@@ -1,8 +1,10 @@
 package controller;
 
 import dao.StudentDAO;
+import model.Student;
 import service.AddStudent;
 import service.DeleteStudent;
+import service.EditStudent;
 import service.ShowAll;
 
 import javax.servlet.ServletException;
@@ -45,6 +47,7 @@ public class landingController extends HttpServlet {
         if (request.getParameter("action") != null) {
             action = request.getParameter("action");
         }
+        StudentDAO studentDAO = new StudentDAO();
         switch (action) {
             case "addition":
                 AddStudent addStudent = new AddStudent();
@@ -54,6 +57,21 @@ public class landingController extends HttpServlet {
             case "delete":
                 DeleteStudent deleteStudent = new DeleteStudent();
                 deleteStudent.delete(Integer.parseInt(request.getParameter("id")));
+                response.sendRedirect("home");
+                break;
+            case "edit":
+                List<String> classList = studentDAO.getClasses();
+                request.setAttribute("classList",
+                        classList);
+                EditStudent editStudent = new EditStudent();
+                Student student = editStudent.findToEdit(Integer.parseInt(request.getParameter("id")));
+                request.setAttribute("student",
+                        student);
+                request.getRequestDispatcher("editPage.jsp").forward(request,
+                        response);
+                break;
+            case "update":
+                studentDAO.update(request);
                 response.sendRedirect("home");
                 break;
             default:

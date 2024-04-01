@@ -2,6 +2,7 @@ package dao;
 
 import model.Student;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface IStudentDAO {
@@ -16,4 +17,8 @@ public interface IStudentDAO {
     void search();
 
     List<String> getClasses();
+
+    Student chooseStudent(int id);
+
+    void update(HttpServletRequest request);
 }

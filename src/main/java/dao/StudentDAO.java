@@ -2,6 +2,7 @@ package dao;
 
 import model.Student;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -75,6 +76,36 @@ public class StudentDAO implements IStudentDAO {
     }
 
     @Override
+    public void update(HttpServletRequest request) {
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement("update student set studentName = ?, birth = ?,"
+                                                                       + " email = ?, address = ?, phoneNumber = ?, className = ?"
+                                                                       + "where studentId = ?;")) {
+            statement.setString(1,
+                    request.getParameter("newName"));
+            String birth = request.getParameter("newBirth");
+            String birthFormatted = birth.split("-")[0] + "-" + birth.split("-")[1] + "-" + birth.split("-")[2];
+            statement.setString(2,
+                    birthFormatted);
+            statement.setString(3,
+                    request.getParameter("newEmail"));
+            statement.setString(4,
+                    request.getParameter("newAddress"));
+            statement.setString(5,
+                    request.getParameter("newPhone"));
+            statement.setString(6,
+                    request.getParameter("newClass"));
+            statement.setInt(7,
+                    Integer.parseInt(request.getParameter("id")));
+
+            int count = statement.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public List<String> getClasses() {
         List<String> classList = new ArrayList<>();
         try (Connection connection = DBConnection.getConnection();
@@ -88,6 +119,38 @@ public class StudentDAO implements IStudentDAO {
             e.printStackTrace();
         }
         return classList;
+    }
+
+    @Override
+    public Student chooseStudent(int id) {
+        Student student = null;
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement("select * from student where studentId = ?;")) {
+            statement.setInt(1,
+                    id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                int studentId = rs.getInt("studentId");
+                String name = rs.getString("studentName");
+                String birth = rs.getString("birth");
+                LocalDate birthFormatted = LocalDate.parse(birth);
+                String email = rs.getString("email");
+                String address = rs.getString("address");
+                String phone = rs.getString("phoneNumber");
+                String className = rs.getString("className");
+
+                student = new Student(id,
+                        name,
+                        birthFormatted,
+                        email,
+                        address,
+                        phone,
+                        className);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return student;
     }
 
     @Override
