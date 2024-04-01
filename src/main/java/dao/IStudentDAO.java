@@ -14,7 +14,7 @@ public interface IStudentDAO {
 
     void delete(int studentId);
 
-    void search();
+    List<Student> search(String sWords);
 
     List<String> getClasses();
 

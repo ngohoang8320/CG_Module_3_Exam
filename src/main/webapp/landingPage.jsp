@@ -10,8 +10,9 @@
     <div class="container-fluid">
         <a class="btn btn-primary" href="home?action=addition">Add</a>
         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex" action="home?action=search" method="get">
+                <input type="hidden" name="action" value="search">
+                <input class="form-control me-2" type="search" placeholder="Search" name="searchWord">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>

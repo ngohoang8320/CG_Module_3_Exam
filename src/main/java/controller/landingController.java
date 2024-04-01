@@ -2,10 +2,7 @@ package controller;
 
 import dao.StudentDAO;
 import model.Student;
-import service.AddStudent;
-import service.DeleteStudent;
-import service.EditStudent;
-import service.ShowAll;
+import service.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,6 +32,12 @@ public class landingController extends HttpServlet {
                 request.setAttribute("classList",
                         classList);
                 request.getRequestDispatcher("addPage.jsp").forward(request,
+                        response);
+                break;
+            case "search":
+                SearchStudent searchStudent = new SearchStudent();
+                searchStudent.foundStudents(request);
+                request.getRequestDispatcher("landingPage.jsp").forward(request,
                         response);
                 break;
             default:

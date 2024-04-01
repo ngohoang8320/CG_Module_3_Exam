@@ -166,7 +166,37 @@ public class StudentDAO implements IStudentDAO {
     }
 
     @Override
-    public void search() {
+    public List<Student> search(String sWords) {
+        List<Student> studentList = new ArrayList<>();
+        try (Connection connection = DBConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement("select * from student where studentName like ?;")) {
+            sWords = "%" + sWords + "%";
+            statement.setString(1,
+                    sWords);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                int id = Integer.parseInt(rs.getString("studentId"));
+                String name = rs.getString("studentName");
+                String birth = rs.getString("birth");
+                LocalDate birthFormatted = LocalDate.parse(birth);
+                String email = rs.getString("email");
+                String address = rs.getString("address");
+                String phone = rs.getString("phoneNumber");
+                String className = rs.getString("className");
 
+                Student student = new Student(id,
+                        name,
+                        birthFormatted,
+                        email,
+                        address,
+                        phone,
+                        className);
+                studentList.add(student);
+            }
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return studentList;
     }
 }
